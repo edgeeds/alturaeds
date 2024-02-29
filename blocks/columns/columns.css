@@ -19,6 +19,20 @@
   display: block;
 }
 
+.custom-column {
+  background-color: var(--footer-color);
+  color: var(--background-color);
+}
+
+.custom-column p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.6rem;
+  width: 90%;
+}
+.custom-column p strong {
+  font-size: var(--body-font-size-l);
+}
+
 @media (width >= 900px) {
   .columns > div {
     align-items: center;

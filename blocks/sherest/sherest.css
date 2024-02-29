@@ -1,4 +1,4 @@
-.cards > ul {
+.sherest > ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -7,40 +7,37 @@
     grid-gap: 16px;
 }
 
-.cards > ul > li {
+.sherest > ul > li {
     border: 1px solid var(--dark-color);
     background-color: var(--background-color)
 }
 
-.cards .cards-card-body {
+.sherest .sherest-card-body {
     margin: 16px;
 }
 
-.cards .cards-card-image {
+.sherest .sherest-card-image {
     line-height: 0;
 }
 
-.cards .cards-card-body > *:first-child {
+.sherest .sherest-card-body > *:first-child {
     margin-top: 0;
 
-    font-size: var(--body-font-size-s);
+    font-size: 1.2rem;
     line-height: 1.8rem;
-    text-align: justify-all;
-    display: block;
 }
-
-.three-line-clamp .cards .cards-card-body > p:last-child {
+.three-line-clamp .sherest .sherest-card-body > p:last-child {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 
-    font-size: var(--body-font-size-xs);
+    font-size: 1rem;
     line-height: 1.6rem;
 }
 
-.cards > ul > li img {
+.sherest > ul > li img {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
