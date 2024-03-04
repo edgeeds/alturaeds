@@ -15,7 +15,7 @@ export default async function decorate(block) {
 
   // decorate footer DOM
   const footer = document.createElement('div');
-  console.log("<> ", fragment, fragment.firstElementChild, footer);
+  // console.log("<> ", fragment, fragment.firstElementChild, footer);
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
   const classes = ['brand', 'nav', 'disc'];
