@@ -22,7 +22,7 @@ async function getContent(sURL) {
     const json = await res.json();
     result = sanitiseHTML(json?.data?.textBlockCfByPath?.item?.body?.html);
   } catch (error) {
-    throw new Error('Failed to fetch query!');
+    throw new Error('Failed to fetch CFRenderer query!');
   }
 
   return result;
