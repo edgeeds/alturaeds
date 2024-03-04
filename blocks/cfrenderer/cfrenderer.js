@@ -14,7 +14,7 @@ function sanitiseHTML(htmlString) {
 }
 async function getContent(sURL) {
   if (!sURL) return null;
-  let result;
+  let result = null;
 
   try {
     const url = new URL(sURL);
@@ -22,29 +22,33 @@ async function getContent(sURL) {
     const json = await res.json();
     result = sanitiseHTML(json?.data?.textBlockCfByPath?.item?.body?.html);
   } catch (error) {
-    console.error('error occurred > ', error);
+    throw new Error('Failed to fetch query!');
   }
 
-  return result || 'No text';
+  return result;
 }
 export default async function decorate(block) {
-  const queryElement = block.querySelector('a[href]');
-  if (queryElement) {
-    const queryURL = queryElement.href;
-    const parentDiv = document.createElement('div');
-    parentDiv.classList.add('cfrenderer-block');
-    const nodeList = await getContent(queryURL);
+  try {
+    const queryElement = block.querySelector('a[href]');
+    if (queryElement) {
+      const queryURL = queryElement.href;
+      const parentDiv = document.createElement('div');
+      parentDiv.classList.add('cfrenderer-block');
+      const nodeList = await getContent(queryURL);
 
-    if (nodeList?.length > 0) {
-      nodeList.forEach((node) => {
-        parentDiv.appendChild(node.cloneNode(true));
-      });
+      if (nodeList) {
+        nodeList.forEach((node) => {
+          parentDiv.appendChild(node.cloneNode(true));
+        });
 
-      // replace the default block with the above
-      queryElement.replaceWith(parentDiv);
-    } else {
-      parentDiv.append(document.createTextNode('Error occurred! Check with admin!'));
-      queryElement.replaceWith()
+        queryElement.replaceWith(parentDiv);
+      } else {
+        throw new Error('No content retrieved.');
+      }
     }
+  } catch (error) {
+    const errorDiv = document.createElement('div');
+    errorDiv.append(document.createTextNode(`Error occurred! ${error.message}`));
+    block.replaceWith(errorDiv);
   }
 }
