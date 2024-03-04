@@ -48,6 +48,7 @@ export default async function decorate(block) {
     }
   } catch (error) {
     const errorDiv = document.createElement('div');
+    errorDiv.classList.add('cfrenderer-error-block');
     errorDiv.append(document.createTextNode(`Error occurred! ${error.message}`));
     block.replaceWith(errorDiv);
   }
