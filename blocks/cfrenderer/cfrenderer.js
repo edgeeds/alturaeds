@@ -35,11 +35,16 @@ export default async function decorate(block) {
     parentDiv.classList.add('cfrenderer-block');
     const nodeList = await getContent(queryURL);
 
-    nodeList.forEach((node) => {
-      parentDiv.appendChild(node.cloneNode(true));
-    });
+    if (nodeList?.length > 0) {
+      nodeList.forEach((node) => {
+        parentDiv.appendChild(node.cloneNode(true));
+      });
 
-    // replace the default block with the above
-    queryElement.replaceWith(parentDiv);
+      // replace the default block with the above
+      queryElement.replaceWith(parentDiv);
+    } else {
+      parentDiv.append(document.createTextNode('Error occurred! Check with admin!'));
+      queryElement.replaceWith()
+    }
   }
 }
