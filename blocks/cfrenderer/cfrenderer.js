@@ -18,7 +18,7 @@ async function getContent(sURL) {
 
   try {
     const url = new URL(sURL);
-    const res = await fetch(url);
+    const res = await fetch(url, { mode: 'no-cors' });
     const json = await res.json();
     result = sanitiseHTML(json?.data?.textBlockCfByPath?.item?.body?.html);
   } catch (error) {
